@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="minimal-ui,width=device-width,
+            initial-scale=1.0, user-scalable=no">
+        <title>Canvas edytor</title>
+        <link rel="stylesheet" href="style.css">
+        <script type='module' src="loadIndex.js"></script>
+
+    </head>
+
+    <body>
+        <main>
+            <h1>EDYTOR CANVAS</h1>
+            <button class="btn" id="btnNewProject">Nowy Projekt</button>
+            <div class="absolute popup">
+                <form method="post" id="form">
+                    <label for="name">Podaj nazwę projektu</label>
+                    <input type="text" id="name">
+                    <input type="submit">
+                </form>
+                <div class="error"></div>
+            </div>
+            <section class="project-list">
+
+            </section>
+
+        </main>
+
+
+    </body>
+</html>
