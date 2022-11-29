@@ -3,7 +3,6 @@ import { Tool } from './Tool.js';
 export class Line extends Tool {
 	constructor() {
 		super();
-		this._drawing = false;
 	}
 
 	onPointerMove(x, y, ctx1, ctx2, width, height) {
@@ -21,14 +20,7 @@ export class Line extends Tool {
 		this._data['type'] = 'line';
 		this._data['coordinates'].push([ x, y ]);
 		this.draw(this._data, ctx);
-		this.sendDate(ctx);
-	}
-
-	onPointerDown(x, y, ctx, ctx2) {
-		this._data['color'] = ctx2.strokeStyle;
-		this._data['width'] = ctx2.lineWidth;
-		this._data['coordinates'] = [ [ x, y ] ];
-		this._drawing = true;
+		this.sendDate();
 	}
 
 	draw(data, ctx) {
