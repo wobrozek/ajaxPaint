@@ -31,6 +31,9 @@ export class Square extends Tool {
 	}
 
 	draw(data, ctx) {
+		ctx.beginPath();
+		ctx.strokeStyle = data['color'];
+		ctx.lineWidth = data['width'];
 		ctx.rect(
 			data['coordinates'][0][0],
 			data['coordinates'][0][1],
@@ -38,6 +41,7 @@ export class Square extends Tool {
 			data['coordinates'][1][1]
 		);
 		ctx.stroke();
-		ctx.beginPath();
+
+		ctx.closePath();
 	}
 }
