@@ -3,31 +3,40 @@ import { Tool } from './Tool.js';
 export class Square extends Tool {
 	constructor() {
 		super();
-		this._drawing = false;
-		this._start = [ 0, 0 ];
 	}
 
 	onPointerMove(x, y, ctx1, ctx2, ctxWidth, ctxHeight) {
 		if (this._drawing) {
 			ctx2.clearRect(0, 0, ctxWidth, ctxHeight);
-			this.drawSquare(x, y, ctx2);
+
+			x = this._data['coordinates'][0][0] - x;
+			y = this._data['coordinates'][0][1] - y;
+			ctx2.rect(this._data['coordinates'][0][0], this._data['coordinates'][0][1], -x, -y);
+			ctx2.stroke();
+			ctx2.beginPath();
 		}
 	}
 
 	onPointerUp(x, y, ctx) {
+		this._data['type'] = 'square';
 		this._drawing = false;
-		this.drawSquare(x, y, ctx);
+
+		// second parametr is hight and widht of rectangle
+		x = -(this._data['coordinates'][0][0] - x);
+		y = -(this._data['coordinates'][0][1] - y);
+
+		this._data['coordinates'].push([ x, y ]);
+		this.draw(this._data, ctx);
+		this.sendDate();
 	}
 
-	onPointerDown(x, y, ctx) {
-		this._start = [ x, y ];
-		this._drawing = true;
-	}
-
-	drawSquare(x, y, ctx) {
-		x = this._start[0] - x;
-		y = this._start[1] - y;
-		ctx.rect(this._start[0], this._start[1], -x, -y);
+	draw(data, ctx) {
+		ctx.rect(
+			data['coordinates'][0][0],
+			data['coordinates'][0][1],
+			data['coordinates'][1][0],
+			data['coordinates'][1][1]
+		);
 		ctx.stroke();
 		ctx.beginPath();
 	}
