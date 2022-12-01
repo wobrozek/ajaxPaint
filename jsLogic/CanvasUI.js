@@ -30,21 +30,63 @@ export class CanvasUI {
 		canvasLayer2.width = width;
 		canvasLayer2.height = height;
 
-		canvas.addEventListener('pointermove', (e) => {
+		canvas.addEventListener('mousemove', (e) => {
 			if (this.currentTool) {
 				this.currentTool.onPointerMove(e.offsetX, e.offsetY, this._ctx1, this._ctx2, width, height);
 			}
 		});
 
-		canvas.addEventListener('pointerdown', (e) => {
+		canvas.addEventListener('mousedown', (e) => {
+			console.log(e);
 			if (this.currentTool) {
 				this.currentTool.onPointerDown(e.offsetX, e.offsetY, this._ctx1, this._ctx2);
 			}
 		});
 
-		canvas.addEventListener('pointerup', (e) => {
+		canvas.addEventListener('mouseup', (e) => {
 			if (this.currentTool) {
 				this.currentTool.onPointerUp(e.offsetX, e.offsetY, this._ctx1, this._ctx2);
+			}
+		});
+
+		canvas.addEventListener('touchstart', (e) => {
+			e.preventDefault;
+			e.stopPropagation;
+			if (this.currentTool) {
+				this.currentTool.onPointerDown(
+					e.changedTouches[0]['pageX'],
+					e.changedTouches[0]['pageY'],
+					this._ctx1,
+					this._ctx2
+				);
+			}
+		});
+
+		canvas.addEventListener('touchmove', (e) => {
+			e.preventDefault;
+			e.stopPropagation;
+			if (this.currentTool) {
+				this.currentTool.onPointerMove(
+					e.changedTouches[0]['pageX'],
+					e.changedTouches[0]['pageY'],
+					this._ctx1,
+					this._ctx2,
+					width,
+					height
+				);
+			}
+		});
+
+		canvas.addEventListener('touchend', (e) => {
+			e.preventDefault;
+			e.stopPropagation;
+			if (this.currentTool) {
+				this.currentTool.onPointerUp(
+					e.changedTouches[0]['pageX'],
+					e.changedTouches[0]['pageY'],
+					this._ctx1,
+					this._ctx2
+				);
 			}
 		});
 
