@@ -25,6 +25,7 @@ canvas {
     position: absolute;
     bottom: 300;
     left: 0;
+    touch-action: none;
 }
 
 .js-tools button {

@@ -39,7 +39,7 @@ export class CanvasUI {
 		canvas.addEventListener('mousedown', (e) => {
 			console.log(e);
 			if (this.currentTool) {
-				this.currentTool.onPointerDown(e.offsetX, e.offsetY, this._ctx1, this._ctx2);
+				this.currentTool.onPointerDown(e.offsetX, e.offsetY, this._ctx1, this._ctx2, width, height);
 			}
 		});
 
@@ -57,7 +57,9 @@ export class CanvasUI {
 					e.changedTouches[0]['pageX'],
 					e.changedTouches[0]['pageY'],
 					this._ctx1,
-					this._ctx2
+					this._ctx2,
+					width,
+					height
 				);
 			}
 		});
@@ -114,8 +116,14 @@ export class CanvasUI {
 
 				// prints all lines on canvas
 				this.history.map((element) => {
+					let scalex = this._width / element['windowWidth'];
+					let scaley = this._height / element['windowHeight'];
+					this._ctx1.scale(scalex, scaley);
 					const tool = factory.getTool(element['type']);
 					tool.draw(element, this._ctx1);
+
+					// return canvass to preivious scale
+					this._ctx1.scale(element['windowWidth'] / this._width, element['windowHeight'] / this._height);
 				});
 			});
 	}

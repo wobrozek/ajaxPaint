@@ -11,7 +11,9 @@ export class Tool {
 			type: '',
 			coordinates: [],
 			color: '',
-			width: ''
+			width: '',
+			windowWidth: '',
+			windowHeight: ''
 		};
 	}
 
@@ -27,10 +29,12 @@ export class Tool {
 		// xhr.send(json);
 	}
 
-	onPointerDown(x, y, ctx, ctx2) {
+	onPointerDown(x, y, ctx, ctx2, width, height) {
 		this._data['color'] = ctx2.strokeStyle;
 		this._data['width'] = ctx2.lineWidth;
 		this._data['coordinates'] = [ [ x, y ] ];
+		this._data['windowWidth'] = width;
+		this._data['windowHeight'] = height;
 		this._drawing = true;
 	}
 }
