@@ -8,9 +8,11 @@ export class CanvasUI {
 		this._ctx2 = undefined;
 		this._width = width;
 		this._height = height;
-		this.history = [];
+		this._history = [];
+		this._localHistory = [];
 		const canv = this.creteCanvas(width, height);
 		ToolsUI.attachToContainer(container, canv);
+		this.downloadData();
 	}
 
 	creteCanvas(width, height) {
@@ -45,7 +47,7 @@ export class CanvasUI {
 
 		canvas.addEventListener('mouseup', (e) => {
 			if (this.currentTool) {
-				this.currentTool.onPointerUp(e.offsetX, e.offsetY, this._ctx1, this._ctx2);
+				this.currentTool.onPointerUp(e.offsetX, e.offsetY, this._ctx1, this._ctx2, width, height);
 			}
 		});
 
@@ -87,7 +89,9 @@ export class CanvasUI {
 					e.changedTouches[0]['pageX'],
 					e.changedTouches[0]['pageY'],
 					this._ctx1,
-					this._ctx2
+					this._ctx2,
+					width,
+					height
 				);
 			}
 		});
@@ -97,9 +101,9 @@ export class CanvasUI {
 		return canvasDiv;
 	}
 
-	sendData() {
-		console.log(this.history);
-		const json = JSON.stringify(this.history);
+	async sendData() {
+		console.log(this._history);
+		const json = JSON.stringify(this._history);
 		fetch(`http://localhost/canvas/projects.php${window.location.search}`, {
 			method: 'POST',
 			body: json
@@ -110,12 +114,13 @@ export class CanvasUI {
 		fetch(`http://localhost/canvas/projects.php/project.php${window.location.search}`)
 			.then((response) => response.json())
 			.then((json) => {
+				this._ctx1.clearRect(0, 0, this._width, this._height);
 				json = JSON.parse(json);
-				this.history = json;
+				this._history = json;
 				const factory = new ToolsFactory();
 
 				// prints all lines on canvas
-				this.history.map((element) => {
+				this._history.map((element) => {
 					let scalex = this._width / element['windowWidth'];
 					let scaley = this._height / element['windowHeight'];
 					this._ctx1.scale(scalex, scaley);
@@ -138,12 +143,27 @@ export class CanvasUI {
 	}
 
 	pushTohistory(obj) {
-		this.history.push(obj);
+		this._history.push(obj);
+		this._localHistory.push(obj);
 		this.sendData();
 	}
 
 	changeWidth(width) {
 		this._ctx1.lineWidth = width;
 		this._ctx2.lineWidth = width;
+	}
+
+	undo() {
+		let undoElement = this._localHistory.pop();
+		this._history = this._history.filter((element) => {
+			if (element['id'] != undoElement['id']) return element;
+		});
+		// after sendData refresh the page
+		this.sendData().finally(() => this.refresh());
+	}
+
+	refresh() {
+		this._ctx1.clearRect(0, 0, this._width, this._height);
+		this.downloadData();
 	}
 }

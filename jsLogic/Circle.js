@@ -18,16 +18,14 @@ export class Circle extends Tool {
 		}
 	}
 
-	onPointerUp(x, y, ctx) {
-		this._drawing = false;
+	onPointerUp(x, y, ctx, ctx2, widht, height) {
 		this._data['type'] = 'circle';
 		let distance = Math.sqrt(
 			Math.pow(this._data['coordinates'][0][0] - x, 2) + Math.pow(this._data['coordinates'][0][1] - y, 2),
 			2
 		);
 		this._data['coordinates'].push([ distance, 0 ]);
-		this.draw(this._data, ctx);
-		this.sendDate();
+		super.onPointerUp(x, y, ctx, ctx2, widht, height);
 	}
 
 	draw(data, ctx) {

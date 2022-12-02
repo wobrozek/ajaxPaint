@@ -17,17 +17,15 @@ export class Square extends Tool {
 		}
 	}
 
-	onPointerUp(x, y, ctx) {
+	onPointerUp(x, y, ctx, ctx2, widht, height) {
 		this._data['type'] = 'square';
-		this._drawing = false;
 
 		// second parametr is hight and widht of rectangle
 		x = -(this._data['coordinates'][0][0] - x);
 		y = -(this._data['coordinates'][0][1] - y);
 
 		this._data['coordinates'].push([ x, y ]);
-		this.draw(this._data, ctx);
-		this.sendDate();
+		super.onPointerUp(x, y, ctx, ctx2, widht, height);
 	}
 
 	draw(data, ctx) {

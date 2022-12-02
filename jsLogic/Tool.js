@@ -18,6 +18,7 @@ export class Tool {
 	}
 
 	sendDate() {
+		console.log(this);
 		this._data['id'] = Date.now() + Math.random();
 		// copy object not reference
 		let copy = { ...this._data };
@@ -27,6 +28,13 @@ export class Tool {
 		// xhr.open('POST', 'http://localhost/canvas/storage.php', true);
 		// xhr.setRequestHeader('Content-type', 'application/json');
 		// xhr.send(json);
+	}
+
+	onPointerUp(x, y, ctx, ctx2, width, height) {
+		ctx2.clearRect(0, 0, width, height);
+		this._drawing = false;
+		this.draw(this._data, ctx);
+		this.sendDate();
 	}
 
 	onPointerDown(x, y, ctx, ctx2, width, height) {

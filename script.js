@@ -21,6 +21,10 @@ inputs.subscribeWidth((width) => {
 	canvas.changeWidth(width);
 });
 
+export function undo() {
+	canvas.undo();
+}
+
 export function updateHistory(history) {
 	canvas.pushTohistory(history);
 }

@@ -13,11 +13,10 @@ export class Pencil extends Tool {
 		}
 	}
 
-	onPointerUp(x, y, ctx1, ctx2) {
+	onPointerUp(x, y, ctx1, ctx2, widht, height) {
 		this._drawing = false;
 		this._data['type'] = 'pencil';
-		ctx2.beginPath();
-		this.sendDate();
+		super.onPointerUp(x, y, ctx1, ctx2, widht, height);
 	}
 
 	draw(data, ctx) {

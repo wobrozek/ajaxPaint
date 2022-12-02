@@ -15,12 +15,10 @@ export class Line extends Tool {
 		}
 	}
 
-	onPointerUp(x, y, ctx) {
-		this._drawing = false;
+	onPointerUp(x, y, ctx, ctx2, widht, height) {
 		this._data['type'] = 'line';
 		this._data['coordinates'].push([ x, y ]);
-		this.draw(this._data, ctx);
-		this.sendDate();
+		super.onPointerUp(x, y, ctx, ctx2, widht, height);
 	}
 
 	draw(data, ctx) {

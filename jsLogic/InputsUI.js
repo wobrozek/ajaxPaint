@@ -1,4 +1,5 @@
 import { ToolsUI } from './ToolsUI.js';
+import { undo } from '../script.js';
 export class InputsUI {
 	constructor(container) {
 		const wraper = ToolsUI.createWraper();
@@ -26,8 +27,14 @@ export class InputsUI {
 			this.subscribersWidth.forEach((element) => element(inputWidth.value));
 		});
 
+		const undoButton = document.createElement('button');
+
+		undoButton.addEventListener('click', undo);
+		undoButton.textContent = 'undo';
+
 		wraper.appendChild(inputColor);
 		wraper.appendChild(inputWidth);
+		wraper.appendChild(undoButton);
 	}
 
 	subscribeColor(subscribers) {
