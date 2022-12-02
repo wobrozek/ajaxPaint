@@ -14,6 +14,7 @@ export class Pencil extends Tool {
 	}
 
 	onPointerUp(x, y, ctx1, ctx2, widht, height) {
+		ctx2.beginPath();
 		this._drawing = false;
 		this._data['type'] = 'pencil';
 		super.onPointerUp(x, y, ctx1, ctx2, widht, height);
