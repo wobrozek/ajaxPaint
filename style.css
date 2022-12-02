@@ -1,3 +1,77 @@
+body {
+    background-color: #353b48;
+    color: #dcdde1;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+.flex-center-column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blur {
+    filter: blur(3px);
+}
+
+.btn {
+    border: solid 1px #273c75;
+    cursor: pointer;
+}
+
+.btn-primary {
+    border: solid 1px #fff;
+    margin: 20px;
+    width: 100px;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.btn-big-blue {
+    border-radius: 10px;
+    position: relative;
+    background-color: #40739e;
+    color: #dcdde1;
+    margin: 20px;
+    padding: 15px 25px 15px 25px;
+}
+
+.btn-big-blue::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: #40739e;
+    border-radius: 10px;
+    content: '';
+    opacity: 0;
+    animation-name: ripple-out;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-delay: 1s;
+}
+
+a {
+    color: #dcdde1;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
 .flex {
     display: flex;
     flex-wrap: wrap;
@@ -41,8 +115,52 @@ canvas {
     cursor: pointer;
 }
 
+.block {
+    display: block;
+}
+
+.justify-content-center {
+    height: 100%;
+    justify-content: center;
+}
+
 input {
     width: 100px;
+}
+
+.relative {
+    position: relative;
+}
+
+.popup {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #7f8fa6;
+}
+
+.popup-wraper {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.error {
+    color: #c23616;
+}
+
+.gap {
+    gap: 10px
+}
+
+.btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 @media only screen and(max-width: 450px) {
@@ -52,6 +170,16 @@ input {
     }
 }
 
-.popup {
-    display: none;
+@keyframes ripple-out {
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        top: -15px;
+        right: -15px;
+        bottom: -15px;
+        left: -15px;
+        opacity: 0;
+    }
 }

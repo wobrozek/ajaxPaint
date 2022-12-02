@@ -1,8 +1,11 @@
+import { undo } from '../script.js';
+
 export class ToolsUI {
 	constructor(container) {
 		const wraper = ToolsUI.createWraper();
 		this.createButtons(wraper);
 		ToolsUI.attachToContainer(container, wraper);
+		this.creteUndoButton(wraper);
 		this.subscribers = [];
 	}
 
@@ -34,6 +37,14 @@ export class ToolsUI {
 		});
 
 		return btn;
+	}
+
+	creteUndoButton(wraper) {
+		const undoButton = document.createElement('button');
+		wraper.appendChild(undoButton);
+
+		undoButton.addEventListener('click', undo);
+		undoButton.textContent = 'undo';
 	}
 
 	subscribe(subscribers) {

@@ -12,23 +12,30 @@
     </head>
 
     <body>
-        <main>
-            <h1>EDYTOR CANVAS</h1>
-            <button class="btn" id="btnNewProject">Nowy Projekt</button>
-            <div class="absolute popup">
-                <form method="post" id="form">
-                    <label for="name">Podaj nazwę projektu</label>
-                    <input type="text" id="name">
-                    <input type="submit">
-                </form>
-                <div class="error"></div>
-            </div>
-            <section class="project-list">
+        <main class="flex-center-column justify-content-center">
+            <section class="flex-center-column" id="blur">
+                <h1>EDYTOR CANVAS</h1>
+                <button class="btn btn-big-blue" id="btnNewProject">Nowy Projekt</button>
+                <section class="project-list">
 
+                </section>
             </section>
 
+            <div class="popup-wraper">
+                <div class="popup justify-content-center flex-center-column">
+                    <div>
+                        <form method="post" id="form" class="flex-center-column
+                            gap">
+                            <label for="name">Podaj nazwę projektu</label>
+                            <input type="text" id="name">
+                            <button type="submit" class="btn btn-big-blue">Prześlij</button>
+                        </form>
+                    </div>
+                    <button class="btn-close" id="btnCloseProject">❌</button>
+                    <div class="error"></div>
+                </div>
+            </div>
         </main>
-
 
     </body>
 </html>

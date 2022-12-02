@@ -1,12 +1,16 @@
 window.onload = () => {
 	const list = document.querySelector('.project-list');
+	const popupWraper = document.querySelector('.popup-wraper');
 	const popup = document.querySelector('.popup');
+	const blur = document.getElementById('blur');
 	const btn = document.getElementById('btnNewProject');
+	const btnCloseProject = document.getElementById('btnCloseProject');
 	const form = document.getElementById('form');
 	const input = document.getElementById('name');
 	const error = document.querySelector('.error');
 
 	const ul = document.createElement('ul');
+	ul.className = 'flex';
 
 	fetch('http://localhost/canvas/projects.php')
 		.then((response) => {
@@ -21,6 +25,7 @@ window.onload = () => {
 				const a = document.createElement('a');
 				a.href = `http://localhost/canvas/canvas.html?q=${name}`;
 				a.innerText = `${name}`;
+				a.classList.add('btn-primary', 'block');
 				li.appendChild(a);
 				ul.appendChild(li);
 			});
@@ -28,8 +33,29 @@ window.onload = () => {
 
 	list.appendChild(ul);
 
-	btn.addEventListener('click', () => {
-		popup.style.display = 'block';
+	// pop up logic
+	btn.addEventListener('click', (e) => {
+		e.stopPropagation;
+		popupWraper.style.display = 'block';
+		blur.classList.add('blur');
+	});
+
+	btnCloseProject.addEventListener('click', (e) => {
+		e.stopPropagation;
+		popupWraper.style.display = 'none';
+		blur.classList.remove('blur');
+	});
+
+	popupWraper.addEventListener('click', (e) => {
+		e.preventDefault;
+		e.stopPropagation;
+		popupWraper.style.display = 'none';
+		blur.classList.remove('blur');
+	});
+
+	popup.addEventListener('click', (e) => {
+		e.stopPropagation;
+		e.cancelBubble = true;
 	});
 
 	document.body.addEventListener('submit', (e) => {
