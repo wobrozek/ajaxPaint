@@ -11,25 +11,26 @@ export class ToolsUI {
 
 	static createWraper() {
 		const wraper = document.createElement('div');
-		wraper.classList.add('flex', 'flex-spaceAround');
+		wraper.classList.add('flex');
 		return wraper;
 	}
 
 	createButtons(wraper) {
-		wraper.appendChild(this.createButton('Pencil', 'pencil'));
-		wraper.appendChild(this.createButton('Line', 'line'));
-		wraper.appendChild(this.createButton('Square', 'square'));
-		wraper.appendChild(this.createButton('Circle', 'circle'));
+		wraper.appendChild(this.createButton('✏', 'pencil'));
+		wraper.appendChild(this.createButton('📏', 'line'));
+		wraper.appendChild(this.createButton('⬜', 'square'));
+		wraper.appendChild(this.createButton('⚪', 'circle'));
 	}
 
 	static attachToContainer(container, wraper) {
 		document.querySelector(container).appendChild(wraper);
 	}
 
-	createButton(name, selector) {
+	createButton(tool, selector) {
 		const btn = document.createElement('button');
+		btn.innerText = tool;
+		btn.classList.add('btn-tool', 'btn');
 		btn.setAttribute('data-tool', selector);
-		btn.textContent = name;
 
 		// inform subscribers about clicking a button
 		btn.addEventListener('click', () => {
@@ -38,13 +39,14 @@ export class ToolsUI {
 
 		return btn;
 	}
-
+	// fa-solid fa-rotate-left
 	creteUndoButton(wraper) {
 		const undoButton = document.createElement('button');
 		wraper.appendChild(undoButton);
 
+		undoButton.classList.add('btn-tool', 'btn');
 		undoButton.addEventListener('click', undo);
-		undoButton.textContent = 'undo';
+		undoButton.textContent = '↩';
 	}
 
 	subscribe(subscribers) {

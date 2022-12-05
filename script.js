@@ -6,7 +6,7 @@ import { InputsUI } from './jsLogic/InputsUI.js';
 const factory = new ToolsFactory();
 const tools = new ToolsUI('.js-tools');
 const inputs = new InputsUI('.js-inputs');
-const canvas = new CanvasUI('.js-canvas', window.innerWidth, window.innerHeight / 2);
+const canvas = new CanvasUI('.js-canvas', window.innerWidth - 50, window.innerHeight - 200);
 
 tools.subscribe((selectedTool) => {
 	const tool = factory.getTool(selectedTool);

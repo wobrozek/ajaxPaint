@@ -1,5 +1,5 @@
 body {
-    background-color: #353b48;
+    background-color: #718093;
     color: #dcdde1;
     box-sizing: border-box;
 }
@@ -89,6 +89,7 @@ ul {
 
 canvas {
     position: absolute;
+    border: 1px solid #2f3640;
 }
 
 .canvas-wraper {
@@ -102,17 +103,15 @@ canvas {
     touch-action: none;
 }
 
-.js-tools button {
-    background-color: #8e44ad;
+.btn-tool {
+    background-color: #2f3640;
     color: #ecf0f1;
-    border-radius: 20px;
-    min-height: 50px;
-    min-width: 100px;
+    height: 50px;
+    width: 50px;
 }
 
-.js-tools button:hover {
-    background-color: #9b59b6;
-    cursor: pointer;
+.btn-tool:hover {
+    background-color: #718093;
 }
 
 .block {
@@ -125,7 +124,8 @@ canvas {
 }
 
 input {
-    width: 100px;
+    width: 125px;
+    margin: 0;
 }
 
 .relative {
@@ -161,6 +161,29 @@ input {
     position: absolute;
     top: 0;
     right: 0;
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+.js-wraper {
+    width: fit-content;
+    margin: auto;
+}
+
+.js-inputs {
+    width: 250px;
+    display: flex;
+    background-color: #2f3640;
 }
 
 @media only screen and(max-width: 450px) {
